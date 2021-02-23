@@ -1,0 +1,62 @@
+#!/bin/bash
+
+#install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+#install zsh and set theme to ys
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+#install zsh plugins
+#zush-autosuggestion
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+#highlight plugin
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+# plugins=(git zsh-autosuggestions zsh-syntax-highlighting jira redis-cli)
+
+#autujump
+brew install autojump
+
+echo "\n# autojump\n[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh" >> ~/.zshrc
+
+
+#set brew update interval: 30days
+echo "\nHOMEBREW_AUTO_UPDATE_SECS=2592000" >> ~/.zshrc
+
+
+#install brew cask
+brew install cask
+
+#install hub
+brew install hub
+
+#install vscode, chrome, edge, slack, docker
+brew cask install google-chrome visual-studio-code microsoft-edge iterm2 slack alfred docker sourcetree postico dbeaver-community
+
+#install wget
+brew install wget jq
+
+#install pg redis
+brew install postgresql redis
+brew services start redis && brew services start postgresql
+
+#install pg client
+brew cask install navicat-for-postgresql
+
+#create ssh key
+#https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+ssh-keygen -t rsa -b 4096 -C "jinke.liu@autodesk.com" -f ~/.ssh/id_rsa -P '' && ssh-add -K && eval "$(ssh-agent -s)"
+
+cat << EOF > ~/.ssh/config
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+EOF
+
+ssh-add -K ~/.ssh/id_rsa
+
+
+#install node development tools
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
