@@ -12,10 +12,16 @@ Scripts to setup mac dev box from scratch.
 |google-chrome|browser|
 |microsoft-edge|browser|
 |visual-studio-code |editor|
-|iterm2 ||
+|iterm2 |terminal|
 |slack|collaboration|
-|alfred ||
-|docker ||
-|sourcetree ||
-|postico ||
-|dbeaver-community||
+|alfred |productivity|
+|docker |dev tool|
+|sourcetree |dev tool|
+|postico |db tool|
+|dbeaver-community|db tool|
+|navicat-for-postgresql|db tool|
+|wget|dev tool|
+|jq|dev tool|
+|postgresql|dev tool|
+|redis|dev tool|
+|nvm|dev|
